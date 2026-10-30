@@ -46,7 +46,8 @@ function App() {
         </div>
         <div className="hero-content">
           <h1 id="hero-title" style={{ fontFamily: `"${heroFont}", 'Geist', sans-serif` }}>
-            <span>between storytelling</span>{' '}
+            <span>between</span>{' '}
+            <span>storytelling</span>{' '}
             <span>and software.</span>
           </h1>
         </div>

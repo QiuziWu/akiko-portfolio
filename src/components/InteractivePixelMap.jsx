@@ -160,6 +160,7 @@ export default function InteractivePixelMap({ map, className = '', interaction }
     <svg
       ref={svgRef}
       className={`pixel-map ${className}`}
+      style={{ '--map-columns': map.columns, '--map-rows': map.rows.length }}
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}
