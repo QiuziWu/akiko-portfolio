@@ -114,6 +114,18 @@
   gap: 12px;
 }
 
+.site-nav a,
+.selected-work {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-nav a:focus-visible,
+.selected-work:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
 .hero-artwork {
   /* Both SVGs share pixels per 60km cell; never fit countries independently. */
   --map-cell-size: min(0.45vw, 0.8svh, 6.4px);
@@ -144,12 +156,12 @@
   left: 54%;
 }
 
-/* Temporary comparison control; stays outside the homepage layout. */
+/* Keep the comparison control above hero-content so it receives clicks. */
 .font-switcher {
   position: absolute;
   top: 112px;
   right: calc(var(--page-gutter) + var(--column-inset));
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 8px;
