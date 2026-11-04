@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import InteractivePixelMap from './components/InteractivePixelMap'
 import ProjectsSection from './components/ProjectsSection'
+import SiteHeader from './components/SiteHeader'
 import { pixelMaps } from './data/pixelMaps'
 import './App.css'
 
 function App() {
   const [heroFont, setHeroFont] = useState('Array')
+
+  useLayoutEffect(() => {
+    if (window.location.hash === '#projects') {
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'instant' })
+    }
+  }, [])
 
   return (
     <main>
@@ -14,19 +21,7 @@ function App() {
           <span /><span /><span /><span />
         </div>
 
-        <header className="site-header">
-          <span className="wordmark">
-            qiuzi wu <span className="name-chinese" lang="zh-Hans">秋子</span>
-          </span>
-
-          <nav className="site-nav" aria-label="Primary navigation">
-            <ul>
-              <li><a href="#projects">projects</a></li>
-              <li><span aria-disabled="true">about</span></li>
-              <li><span aria-disabled="true">contact</span></li>
-            </ul>
-          </nav>
-        </header>
+        <SiteHeader />
 
         <div className="font-switcher">
           <label htmlFor="hero-font">hero font</label>
