@@ -1,3 +1,13 @@
+/* YouchaSanz Light by Terry Wang, subset to 秋 for the About hero. */
+@font-face {
+  font-family: 'About Calligraphy';
+  src: url('./assets/autumn-calligraphy.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  unicode-range: U+79CB;
+}
+
 .about-page {
   position: relative;
 }
@@ -10,101 +20,200 @@
 }
 
 .about-hero {
+  --glyph-size: clamp(220px, 22vw, 280px);
+
   position: relative;
   display: grid;
   flex: 1;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: start;
-  padding-bottom: clamp(36px, 8svh, 96px);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  min-height: calc(var(--glyph-size) + 158px);
 }
 
-.about-portrait {
-  display: grid;
-  grid-column: 3 / -1;
-  grid-row: 1;
-  place-items: center;
-  justify-self: center;
-  width: min(80%, 320px, 48svh);
-  aspect-ratio: 4 / 5;
-  margin-top: clamp(24px, 10svh, 108px);
-  background: var(--rule);
+.about-character-part {
+  --character-color: #654b3e;
+
+  position: absolute;
+  z-index: 1;
+  top: var(--part-top, 50%);
+  left: var(--part-center);
+  width: calc(var(--glyph-size) / 2);
+  height: var(--glyph-size);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #b8ada5;
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(var(--part-scale, 1));
+  transition:
+    top 600ms cubic-bezier(.22, .68, .2, 1),
+    left 600ms cubic-bezier(.22, .68, .2, 1),
+    transform 600ms cubic-bezier(.22, .68, .2, 1),
+    color 180ms ease;
 }
 
-.about-portrait,
-.about-scroll {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.5;
+.about-character-part--grain {
+  --part-center: calc(50% - var(--glyph-size) / 4);
+}
+
+.about-character-part--fire {
+  --part-center: calc(50% + var(--glyph-size) / 4);
+}
+
+.about-character-part svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.about-character-part text {
+  font-family: 'About Calligraphy', 'Songti SC', serif;
+  pointer-events: visiblePainted;
+}
+
+.about-character-part:focus-visible {
+  outline: 1px solid var(--character-color);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .about-character-part:hover {
+    color: var(--character-color);
+  }
+}
+
+.about-hero[data-story] .about-character-part[aria-pressed='false'] {
+  --part-scale: .78;
+}
+
+.about-character-part[aria-pressed='true'] {
+  --part-scale: 1.4;
+
+  color: var(--character-color);
+}
+
+.about-hero[data-story='grain'] .about-character-part--grain {
+  --part-center: 17%;
+}
+
+.about-hero[data-story='grain'] .about-character-part--fire {
+  --part-center: 93%;
+}
+
+.about-hero[data-story='fire'] .about-character-part--grain {
+  --part-center: 7%;
+}
+
+.about-hero[data-story='fire'] .about-character-part--fire {
+  --part-center: 85%;
 }
 
 .about-intro {
-  grid-column: 1 / 3;
-  grid-row: 1;
-  align-self: end;
-  container-type: inline-size;
+  position: absolute;
+  inset: calc(50% + var(--glyph-size) / 2 + 18px) var(--column-inset) auto;
+  font-family: 'FontA', 'Geist', sans-serif;
+  text-align: center;
 }
 
 .about-intro h1 {
-  font-family: 'FontA', 'Geist', sans-serif;
-  /* The title is about 25.6em wide in Font A. */
-  font-size: min(clamp(18px, 2.5vw, 24px), 3.8cqi);
+  font-size: 21px;
   font-weight: 400;
-  line-height: 1.15;
-  text-align: center;
-  white-space: nowrap;
+  line-height: 1.5;
 }
 
-.about-scroll {
-  display: inline-flex;
-  gap: 8px;
-  margin-top: 24px;
-  margin-inline-start: clamp(8px, 5vw, 88px);
-  color: inherit;
-  text-decoration: none;
+.about-intro p {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
-.about-scroll:focus-visible {
-  outline: 1px solid currentColor;
-  outline-offset: 4px;
+.about-hero[data-story] .about-intro {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
-@media (width > 700px) {
-  .about-intro {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-self: stretch;
-  }
-
-  .about-intro h1 {
-    grid-row: 2;
-  }
-
-  .about-scroll {
-    grid-row: 3;
-    place-self: end start;
-  }
+.about-story {
+  grid-row: 1;
+  min-width: 0;
+  padding-inline: var(--column-inset);
 }
 
-@media (max-width: 700px) {
+.about-hero[data-story='grain'] .about-story {
+  grid-column: 5 / 11;
+}
+
+.about-hero[data-story='fire'] .about-story {
+  grid-column: 3 / 9;
+}
+
+.about-portrait-section {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(64px, 12svh, 128px) var(--page-gutter);
+}
+
+.about-portrait-content {
+  display: grid;
+  gap: 40px;
+  width: min(80%, 320px, 48svh);
+}
+
+.about-portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 760px) {
   .about-hero {
+    --glyph-size: clamp(160px, 54vw, 224px);
+
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 40px;
-    padding-inline: var(--column-inset);
   }
 
-  .about-portrait {
+  .about-hero[data-story] {
+    --part-top: calc(var(--glyph-size) * .7 + 18px);
+
+    align-content: start;
+    padding-block: calc(var(--glyph-size) * 1.4 + 32px) 64px;
+  }
+
+  .about-hero[data-story='grain'] .about-character-part--grain {
+    --part-center: 28%;
+  }
+
+  .about-hero[data-story='grain'] .about-character-part--fire {
+    --part-center: 75%;
+  }
+
+  .about-hero[data-story='fire'] .about-character-part--grain {
+    --part-center: 25%;
+  }
+
+  .about-hero[data-story='fire'] .about-character-part--fire {
+    --part-center: 72%;
+  }
+
+  .about-hero[data-story] .about-story {
     grid-column: 1;
-    justify-self: end;
+    width: min(100%, 520px);
+    justify-self: center;
+  }
+
+  .about-portrait-content {
     width: min(64%, 240px, 40svh);
-    margin-top: clamp(24px, 6svh, 56px);
   }
+}
 
-  .about-intro {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .about-scroll {
-    margin-inline-start: 0;
+@media (prefers-reduced-motion: reduce) {
+  .about-character-part {
+    transition: none;
   }
 }
