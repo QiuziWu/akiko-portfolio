@@ -1,0 +1,265 @@
+.photography-page {
+  position: relative;
+  min-height: 100svh;
+  padding-inline: var(--page-gutter);
+}
+
+.photography-intro {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: min(100%, 1056px);
+  min-height: calc(100svh - 72px);
+  margin-inline: auto;
+  padding: clamp(48px, 7vw, 96px) var(--column-inset) 80px;
+}
+
+.photography-intro h1 {
+  clip-path: inset(50%);
+  font-family: 'FontA', 'Geist', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.photography-intro-copy {
+  align-self: center;
+  width: min(100%, 900px);
+  margin: 64px auto;
+  font-family: 'FontA', 'Geist', sans-serif;
+  font-size: clamp(24px, 2vw, 28px);
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.photography-intro-copy p + p {
+  margin-top: 1em;
+}
+
+.photography-intro-ending {
+  white-space: nowrap;
+}
+
+.photography-gallery {
+  position: relative;
+  width: min(100%, 1600px);
+  margin: 0 auto;
+  padding: 0 var(--column-inset) clamp(80px, 8vw, 128px);
+  list-style: none;
+  column-count: 4;
+  column-gap: 12px;
+}
+
+.photography-gallery-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+  break-inside: avoid;
+  vertical-align: top;
+}
+
+.photography-thumbnail {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.photography-thumbnail img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.photography-filename {
+  margin-top: 8px;
+  color: #65655f;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100svh;
+  max-height: none;
+  margin: 0;
+  padding: 16px 24px;
+  border: 0;
+  color: #f7f7f5;
+  background: #171717;
+}
+
+.photo-lightbox[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 16px;
+}
+
+.photo-lightbox::backdrop {
+  background: #171717;
+}
+
+.photo-lightbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.photo-lightbox-header h2,
+.photo-lightbox-close,
+.photo-lightbox-counter {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.photo-lightbox button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity 160ms ease;
+}
+
+.photo-lightbox-close {
+  margin-right: -8px;
+}
+
+.photo-lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  padding-inline: 40px;
+  touch-action: pan-y;
+}
+
+.photo-lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 160px);
+  object-fit: contain;
+  user-select: none;
+  animation: photo-lightbox-in 150ms ease both;
+}
+
+.photo-lightbox-arrow {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.photo-lightbox-arrow--previous {
+  left: -8px;
+}
+
+.photo-lightbox-arrow--next {
+  right: -8px;
+}
+
+.photo-lightbox-counter {
+  text-align: center;
+}
+
+.photography-thumbnail:focus-visible,
+.photo-lightbox button:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .photography-thumbnail:hover {
+    opacity: .85;
+  }
+
+  .photo-lightbox button:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes photo-lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (min-width: 1400px) {
+  .photography-gallery {
+    column-count: 5;
+  }
+}
+
+@media (max-width: 1024px) {
+  .photography-gallery {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 700px) {
+  .photography-intro-copy {
+    font-size: clamp(22px, 4.5vw, 26px);
+  }
+}
+
+@media (max-width: 600px) {
+  .photography-intro {
+    min-height: calc(100svh - 100px);
+    padding-block: 40px 64px;
+  }
+
+  .photography-intro h1 {
+    font-size: 24px;
+  }
+
+  .photography-intro-copy {
+    margin-block: 48px;
+  }
+
+  .photography-gallery {
+    column-count: 2;
+    column-gap: 8px;
+  }
+
+  .photo-lightbox {
+    padding-inline: 12px;
+  }
+
+  .photo-lightbox-stage {
+    padding-inline: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photography-thumbnail,
+  .photo-lightbox button {
+    transition: none;
+  }
+
+  .photo-lightbox-image {
+    animation: none;
+  }
+}

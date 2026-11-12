@@ -1,0 +1,263 @@
+.films-page {
+  position: relative;
+  min-height: 100svh;
+  padding-inline: var(--page-gutter);
+}
+
+.films-content {
+  position: relative;
+  width: min(100%, 1056px);
+  margin-inline: auto;
+  padding: clamp(48px, 7vw, 96px) var(--column-inset) clamp(80px, 10vw, 160px);
+}
+
+.films-content h1 {
+  margin-bottom: 48px;
+  font-family: 'FontA', 'Geist', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.films-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(40px, 8vw, 128px);
+}
+
+.film-gallery {
+  display: grid;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.film-gallery-item {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+.film-gallery-entry {
+  width: min(100%, 350px);
+}
+
+.film-number,
+.film-caption,
+.film-information dt,
+.film-player-header button,
+.film-player-screen p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.film-number {
+  padding-top: 4px;
+}
+
+.film-thumbnail {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--rule);
+  cursor: pointer;
+  opacity: .75;
+  transition: opacity 180ms ease, outline-color 180ms ease;
+  outline: 1px solid transparent;
+  outline-offset: 4px;
+}
+
+.film-thumbnail[aria-pressed='true'] {
+  outline-color: #b8b8b0;
+  opacity: 1;
+}
+
+.film-thumbnail img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.film-caption {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 12px;
+}
+
+.film-caption span:last-child {
+  color: #65655f;
+}
+
+.film-information {
+  position: sticky;
+  top: clamp(48px, 9svh, 96px);
+  min-width: 0;
+}
+
+.film-information-copy {
+  max-width: 360px;
+  overflow-wrap: anywhere;
+  animation: film-copy-in 180ms ease both;
+}
+
+.film-information h2 {
+  margin: 0 0 40px;
+  font-family: 'FontA', 'Geist', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.film-information .film-title--with-subtitle {
+  margin-bottom: 6px;
+}
+
+.film-information-subtitle {
+  margin: 0 0 40px;
+  color: #65655f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.film-information dl {
+  margin: 0;
+}
+
+.film-information dt {
+  margin-bottom: 12px;
+}
+
+.film-information dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.film-information dd + dt {
+  margin-top: 36px;
+}
+
+.film-information dd p + p {
+  margin-top: 1em;
+}
+
+.film-player {
+  width: min(960px, calc(100% - 40px));
+  max-width: none;
+  max-height: calc(100svh - 40px);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  color: inherit;
+  background: #f7f7f5;
+}
+
+.film-player::backdrop {
+  background: rgb(23 23 23 / 75%);
+}
+
+.film-player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.film-player-header h2 {
+  margin: 0;
+  font-family: 'FontA', 'Geist', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.film-player-header button {
+  min-height: 36px;
+  padding: 8px 0 8px 12px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.film-player-screen {
+  display: grid;
+  width: 100%;
+  min-height: 200px;
+  aspect-ratio: 16 / 9;
+  place-items: center;
+  color: #f7f7f5;
+  background: #171717;
+}
+
+.film-player-screen iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.film-thumbnail:focus-visible,
+.film-player-header button:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .film-thumbnail:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes film-copy-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 700px) {
+  .films-content {
+    padding-top: 40px;
+  }
+
+  .films-content h1 {
+    margin-bottom: 32px;
+    font-size: 24px;
+  }
+
+  .films-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .film-information {
+    position: static;
+    margin-left: 36px;
+  }
+
+  .film-player {
+    width: calc(100% - 24px);
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-thumbnail {
+    transition: none;
+  }
+
+  .film-information-copy {
+    animation: none;
+  }
+}

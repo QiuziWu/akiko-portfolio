@@ -1,12 +1,11 @@
 import { useEffect, useRef } from 'react'
 import './ProjectsSection.css'
 
-// TODO: Add real project destinations after the detail pages are ready.
-// Replace each preview button with an anchor when its destination exists.
+// Add destinations as project detail pages become available.
 const projects = [
   { number: '01', title: 'Movify', category: 'Digital Experience' },
-  { number: '02', title: 'Portraits', category: 'Photography' },
-  { number: '03', title: 'Selected Films', category: 'Film & Storytelling' },
+  { number: '02', title: 'Photography', category: 'Photography', href: '/photography/' },
+  { number: '03', title: 'Selected Films', category: 'Film & Storytelling', href: '/selected-films/' },
   { number: '04', title: 'Editorial Works', category: 'Content Creation' },
 ]
 
@@ -79,27 +78,32 @@ export default function ProjectsSection() {
       </div>
 
       <p id="projects-preview-note" className="projects-sr-only">
-        Project details are not available in this layout prototype.
+        This project’s details are not available yet.
       </p>
       <ol className="project-index" aria-label="Selected projects">
-        {projects.map((project, index) => (
-          <li key={project.number} className={index % 2 ? 'project-item project-item--right' : 'project-item'}>
-            {/* TODO: Add project thumbnail after layout approval. */}
-            <button
-              type="button"
-              className="project-entry"
-              aria-disabled="true"
-              aria-describedby="projects-preview-note"
-            >
-              <span className="project-number">{project.number}</span>
-              <span className="project-copy">
-                <span className="project-title">{project.title}</span>
-                <span className="project-category">{project.category}</span>
-              </span>
-              <span className="project-arrow" aria-hidden="true">{index % 2 ? '↖' : '↗'}</span>
-            </button>
-          </li>
-        ))}
+        {projects.map((project, index) => {
+          const Entry = project.href ? 'a' : 'button'
+
+          return (
+            <li key={project.number} className={index % 2 ? 'project-item project-item--right' : 'project-item'}>
+              {/* TODO: Add project thumbnail after layout approval. */}
+              <Entry
+                href={project.href}
+                type={project.href ? undefined : 'button'}
+                className="project-entry"
+                aria-disabled={project.href ? undefined : true}
+                aria-describedby={project.href ? undefined : 'projects-preview-note'}
+              >
+                <span className="project-number">{project.number}</span>
+                <span className="project-copy">
+                  <span className="project-title">{project.title}</span>
+                  <span className="project-category">{project.category}</span>
+                </span>
+                <span className="project-arrow" aria-hidden="true">{index % 2 ? '↖' : '↗'}</span>
+              </Entry>
+            </li>
+          )
+        })}
       </ol>
     </section>
   )

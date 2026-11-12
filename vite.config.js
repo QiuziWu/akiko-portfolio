@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rolldownOptions: {
-      input: ['index.html', 'about/index.html'],
+      input: ['index.html', 'about/index.html', 'selected-films/index.html', 'photography/index.html'],
     },
   },
 })

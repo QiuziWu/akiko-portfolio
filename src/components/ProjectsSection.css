@@ -104,6 +104,11 @@
   line-height: 1.5;
 }
 
+.project-entry[href] {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .project-number {
   align-self: start;
   padding-top: 10px;
