@@ -1,7 +1,3 @@
-import placeholder from '../assets/film-placeholder.svg'
-
-// Replace these placeholders with the film covers and production details.
-// Set youtubeVideoId to the ID from each film's YouTube URL when available.
 export const films = [
   {
     id: '01',
@@ -31,11 +27,23 @@ export const films = [
   },
   {
     id: 'film-03',
-    title: 'Film 03',
-    year: 'Year to be added',
-    role: 'Role to be added.',
-    description: 'Film description to be added.',
-    thumbnail: placeholder,
-    youtubeVideoId: '',
+    title: 'Choose Your Own Path',
+    subtitle: 'Langsheng Pharmaceutical',
+    category: 'Spec Commercial',
+    year: '',
+    role: 'Creative Planning · Directing · Cinematography · Editing',
+    description: 'A spec commercial exploring women’s autonomy and the societal expectations that shape their choices.\n\nThrough symbolic imagery and visual storytelling, the film challenges traditional gender roles and the pressures placed on women to follow predetermined paths.\n\nAt its heart, the film asks a simple question: Who gets to decide the direction of a woman’s life?',
+    thumbnail: 'https://i.ytimg.com/vi/5Ql5KPfJAjs/hqdefault.jpg',
+    youtubeVideoId: '5Ql5KPfJAjs',
+  },
+  {
+    id: 'film-04',
+    title: 'The Lucky Lottery Shop',
+    category: 'Documentary Short Film',
+    year: '',
+    role: 'On-Camera Presenter · Script Supervisor',
+    description: 'A documentary short film exploring the relationship between luck, hope, and the desire to change one’s life.\n\nSet in a small lottery shop near a university in Changsha, the film follows the story of a student who unexpectedly wins ¥250,000. Through street interviews and personal stories, it reveals the dreams and expectations people attach to sudden fortune.\n\nBeyond the excitement of winning, the film raises a deeper question: Is our future determined by chance, or by the choices we make?',
+    thumbnail: 'https://i.ytimg.com/vi/75jMPpmc4wo/hqdefault.jpg',
+    youtubeVideoId: '75jMPpmc4wo',
   },
 ]
